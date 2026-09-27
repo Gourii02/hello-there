@@ -50,6 +50,12 @@ docker build --tag hello-there:production .
 
 For deployment, provide a managed PostgreSQL connection through the host's private `DATABASE_URL` setting. Do not use the local Compose credentials or expose `.env` in the image.
 
+## Deploy a temporary staging instance on Render
+
+The root `render.yaml` defines a free Docker web service and a private PostgreSQL database. To create them, sign in to Render, choose **New → Blueprint**, connect this GitHub repository, and review the resources before applying the Blueprint. The web service uses `/api/health` for its health check and is configured to deploy after GitHub checks pass.
+
+This free setup is only for trying the deployment: the web service sleeps when idle, and the free PostgreSQL database expires after 30 days and has no backups. Do not store important or real visitor data there. Upgrade the database before its expiry if you need to keep data; never apply a paid plan without reviewing its current price first.
+
 ## Checks
 
 ```sh

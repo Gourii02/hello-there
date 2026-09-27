@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: hello-there
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: hello-there-db
+          property: connectionString
+
+databases:
+  - name: hello-there-db
+    databaseName: hello_there
+    user: hello_there_user
+    plan: free
+    postgresMajorVersion: "16"
+    ipAllowList: []
