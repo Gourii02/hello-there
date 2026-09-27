@@ -32,9 +32,12 @@ Open the URL printed by Vite, usually `http://localhost:5173`. Vite forwards `/a
 
 ```sh
 npm test
+npm run test:integration
 npm run lint
 npm run build
 ```
+
+`npm run test:integration` uses a separate PostgreSQL database ending in `_test` and resets only its greeting table. If `TEST_DATABASE_URL` is not set, it derives a `_test` database name from `DATABASE_URL` and creates that database if needed. GitHub Actions uses its own temporary PostgreSQL service. The bouquet route is mocked in this test, so it does not depend on Wikimedia being available.
 
 ## API
 
