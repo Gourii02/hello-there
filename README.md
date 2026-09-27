@@ -56,6 +56,8 @@ The root `render.yaml` defines a free Docker web service and a private PostgreSQ
 
 This free setup is only for trying the deployment: the web service sleeps when idle, and the free PostgreSQL database expires after 30 days and has no backups. Do not store important or real visitor data there. Upgrade the database before its expiry if you need to keep data; never apply a paid plan without reviewing its current price first.
 
+External database access is managed in Render's database **Info → Networking** settings rather than in the Blueprint. Add only your current client IP as a `/32` rule when connecting from DBeaver; Blueprint syncs then won't replace that dashboard rule.
+
 ## Checks
 
 ```sh
