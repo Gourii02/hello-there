@@ -28,7 +28,7 @@ npm run dev
 
 Open the URL printed by Vite, usually `http://localhost:5173`. Vite forwards `/api` requests to the API on port 3001.
 
-## Run with Docker Compose
+## Run the development stack with Docker Compose
 
 Start Docker Desktop, then run:
 
@@ -39,6 +39,16 @@ docker compose up --build
 Open `http://localhost:5175`. Compose starts Vite, the API, and a separate PostgreSQL container. The API waits for PostgreSQL, applies the migration, then starts. The container database is published on port 5433 so it does not replace or conflict with your local PostgreSQL on port 5432. Its data persists in a Docker volume when you stop the services with Ctrl+C or `docker compose down`.
 
 The default Compose password is only for local development. To change it, set `DOCKER_POSTGRES_PASSWORD` in a root `.env` file, which is ignored by Git and Docker. Do not use the default credentials in a deployed environment.
+
+## Build the production image
+
+The production image builds the frontend, installs only runtime dependencies, and serves the built site and API from one Express process. It requires `DATABASE_URL`, applies the database migration at startup, and listens on `PORT` (default 3001).
+
+```sh
+docker build --tag hello-there:production .
+```
+
+For deployment, provide a managed PostgreSQL connection through the host's private `DATABASE_URL` setting. Do not use the local Compose credentials or expose `.env` in the image.
 
 ## Checks
 
