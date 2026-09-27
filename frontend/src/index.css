@@ -1,0 +1,37 @@
+:root {
+  font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+  color: #302d29;
+  background: #f6f3ec;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --ink: #302d29;
+  --muted: #817a70;
+  --line: #e3ded5;
+  --coral: #ed8064;
+  --coral-dark: #bd533c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f6f3ec;
+  background-image: radial-gradient(#c9c0b41a 0.7px, transparent 0.7px);
+  background-size: 8px 8px;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+::selection {
+  background: #f5b4a033;
+}
