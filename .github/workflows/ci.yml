@@ -34,3 +34,16 @@ jobs:
       - run: npm run test:integration
       - run: npm run lint
       - run: npm run build
+      - name: Build and start Docker Compose stack
+        run: docker compose up --build --detach --wait
+      - name: Smoke-test containerized application
+        run: |
+          curl --retry 10 --retry-connrefused --retry-delay 2 --fail --silent --show-error http://localhost:5175/ > /dev/null
+          curl --fail --silent --show-error http://localhost:5175/api/health
+          greeting=$(curl --fail --silent --show-error --request POST --header 'Content-Type: application/json' --data '{"name":"CI"}' http://localhost:5175/api/greet)
+          echo "$greeting" | grep -Fq '"greeting":"Hello, CI!"'
+          stats=$(curl --fail --silent --show-error http://localhost:5175/api/stats)
+          echo "$stats" | grep -Fq '"totalGreetings":1'
+      - name: Stop Docker Compose stack
+        if: always()
+        run: docker compose down --volumes

@@ -67,4 +67,4 @@ This counts greeting submissions, not unique people or authenticated logins. The
 Browser -> React/Vite -> /api proxy -> Express -> validation -> PostgreSQL
 ```
 
-The GitHub Actions workflow runs tests, lint, and production builds for both workspaces on pushes and pull requests.
+The GitHub Actions workflow runs unit and database integration tests, lint, production builds, then starts the Docker Compose stack and smoke-tests a greeting through its web proxy on pushes and pull requests.
